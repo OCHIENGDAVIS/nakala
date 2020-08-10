@@ -1,16 +1,13 @@
 from django.db import models
 
+
 class CitizenModel(models.Model):
     title = models.CharField(max_length=255, null=True, blank=True)
     author = models.CharField(max_length=255, null=True, blank=True)
-    image = models.CharField(max_length=255, null=True, blank=True)
     published_on = models.CharField(max_length=255, null=True, blank=True)
-    content = models.TextField(null=True, blank=True)
-    summary = models.TextField(null=True, blank=True)
-    url = models.CharField(blank=True, null=True, max_length=255)
-    timestamp = models.CharField(blank=True, null=True, max_length=255)
-    spider = models.CharField(blank=True, null=True, max_length=255)
-    domain = models.CharField(blank=True, null=True, max_length=255)
+    body = models.TextField(null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
 
     class Meta:
         verbose_name = 'Citizen Articles'

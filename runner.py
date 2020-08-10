@@ -11,4 +11,4 @@ def set_interval(func, sec):
     t.start()
     return t
 
-set_interval(startCrawler, 10)
+set_interval(startCrawler, 3)

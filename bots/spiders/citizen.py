@@ -1,6 +1,8 @@
-import scrapy
+
 from scrapy.spiders import CrawlSpider, Rule
 from scrapy.linkextractors import LinkExtractor
+from pyquery import PyQuery as pq
+from ..items import CitizenArticleItem
 
 
 class Citizen(CrawlSpider):
@@ -12,21 +14,25 @@ class Citizen(CrawlSpider):
     ]
 
     def parse_items(self, response):
-      
-        main_story = response.css('div.articlestory')
-      
-        title = main_story.css('h1.articleh1::text').extract()[0]
-        author = main_story.css('section.main-post-author').css('a::text').extract()[0]
-        published_on = main_story.css('span.date-tag::text').extract()[0]
-        image = main_story.css('figure.images-section').css('img').xpath('@src').get()
-        summary = main_story.css('div.summary').css('li::text').extract()
-        content = main_story.css('div.parallax-container').css('p::text').extract()[0]
-        return {
-            "title" : title,
-            "author": author,
-            "published_on": published_on,
-            "image": image,
-            "summary": summary,
-            "content": content
-        }
-      
+        q = pq(response.text)
+        q('.votd-title').remove()
+        q('.votd-content-title').remove()
+        q('.mid-content-also-read').remove()
+        title = q('h1.articleh1').text()
+        if title is None:
+            return
+        author = q('.main-post-author').text()
+        if author is None:
+            return
+        published_on = q('.date-tag').text()
+        if published_on is None:
+            return
+        body = q('.parallax-container p').text()
+        if body is None:
+            return
+        item = CitizenArticleItem()
+        item['title'] = title
+        item['author'] = author
+        item['published_on'] = published_on
+        item['body'] = body
+        yield item

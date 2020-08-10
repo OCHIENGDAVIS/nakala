@@ -5,9 +5,26 @@
 
 
 # useful for handling different item types with a single interface
-from itemadapter import ItemAdapter
 
 
 class BotsPipeline:
     def process_item(self, item, spider):
+
+        return item
+
+
+class CitizenPipeline(object):
+
+    def process_item(self, item, spider):
+
+        print('ITEM FROM FIRST PIPELINE....', item)
+        return item
+
+
+class SaveCitizenCitizenPipeline(object):
+
+    def process_item(self, item, spider):
+
+        print('FROM SECOND PIPELINE', item)
+        item.save()
         return item
