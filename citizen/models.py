@@ -7,6 +7,12 @@ class CitizenModel(models.Model):
     published_on = models.CharField(max_length=255, null=True, blank=True)
     body = models.TextField(null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
+    image_urls = models.TextField(null=True)
+    images = models.TextField(null=True)
+    path = models.CharField(null=True, blank=True, max_length=300)
+    checksum = models.CharField(null=True, blank=True, max_length=300)
+    status = models.CharField(null=True, blank=True, max_length=300)
+
 
 
     class Meta:

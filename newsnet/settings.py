@@ -120,11 +120,12 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-
 MEDIA_URL = '/media/'
 
 STATIC_ROOT = Path(BASE_DIR, 'static', 'static-root' )
 
 MEDIA_ROOT = Path(BASE_DIR, 'static', 'media-root' )
 
-# STATICFILES_DIRS = Path((Path(BASE_DIR, 'static', 'dirs')), )
+STATICFILES_DIRS = [
+    Path(BASE_DIR, 'static').__str__()
+]

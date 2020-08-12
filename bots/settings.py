@@ -56,12 +56,12 @@ TELNETCONSOLE_ENABLED = False
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-SPIDER_MIDDLEWARES = {
-   'scrapy_deltafetch.DeltaFetch': 100,
+# SPIDER_MIDDLEWARES = {
+#    'scrapy_deltafetch.DeltaFetch': 100,
+#
+# }
 
-}
-
-DELTAFETCH_ENABLED = True
+DELTAFETCH_ENABLED = False
 
 # DELTAFETCH_RESET = 1
 
@@ -80,6 +80,7 @@ DELTAFETCH_ENABLED = True
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+   'scrapy.pipelines.images.ImagesPipeline': 1,
    'bots.pipelines.CitizenPipeline': 100,
    'bots.pipelines.SaveCitizenCitizenPipeline': 200,
 }
@@ -107,4 +108,13 @@ ITEM_PIPELINES = {
 
 LOG_ENABLED = True
 
-DEPTH_LIMIT = 1
+# DEPTH_LIMIT = 2
+
+# IMAGES SETTINGS FOR SCRAPY
+
+IMAGES_STORE = Path(DJANGO_BASE_DIR, 'static', 'imgs').__str__()
+MEDIA_ALLOW_REDIRECTS = True
+IMAGES_THUMBS = {
+    'small': (50, 50),
+    'big': (270, 270),
+}

@@ -18,6 +18,7 @@ class Citizen(CrawlSpider):
         q('.votd-title').remove()
         q('.votd-content-title').remove()
         q('.mid-content-also-read').remove()
+        image_link = q('.images-section img').attr('src')
         title = q('h1.articleh1').text()
         if title is None:
             return
@@ -35,4 +36,5 @@ class Citizen(CrawlSpider):
         item['author'] = author
         item['published_on'] = published_on
         item['body'] = body
+        item['image_urls'] = [image_link, ]
         yield item
