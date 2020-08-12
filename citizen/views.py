@@ -6,7 +6,7 @@ from .models import CitizenModel
 
 
 def index(request):
-    articles = CitizenModel.objects.all()[:10]
+    articles = CitizenModel.objects.all()[:30]
     context= {
         'articles': articles,
         'title': 'Citizen'

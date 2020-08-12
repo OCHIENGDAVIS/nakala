@@ -12,7 +12,7 @@ class CitizenModel(models.Model):
     path = models.CharField(null=True, blank=True, max_length=300)
     checksum = models.CharField(null=True, blank=True, max_length=300)
     status = models.CharField(null=True, blank=True, max_length=300)
-
+    url = models.CharField(max_length=300, null=True, blank=True)
 
 
     class Meta:

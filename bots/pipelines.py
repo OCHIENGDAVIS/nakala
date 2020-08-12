@@ -5,7 +5,7 @@
 
 
 # useful for handling different item types with a single interface
-import json
+from citizen.models import CitizenModel
 
 class BotsPipeline:
     def process_item(self, item, spider):
@@ -31,5 +31,15 @@ class CitizenPipeline(object):
 class SaveCitizenCitizenPipeline(object):
 
     def process_item(self, item, spider):
+        title = item['title']
+        url = item['url']
+        qs = CitizenModel.objects.filter(title__iexact=title)
+        if qs.exists():
+            print('article already exists .....')
+            return
+        url_exists = CitizenModel.objects.filter(url__iexact=url)
+        if url_exists.exists():
+            print('Article already exists')
+            return 
         item.save()
         return item

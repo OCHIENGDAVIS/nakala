@@ -20,18 +20,22 @@ class Citizen(CrawlSpider):
         q('.mid-content-also-read').remove()
         image_link = q('.images-section img').attr('src')
         title = q('h1.articleh1').text()
-        if title is None:
+        if title == '':
             return
         author = q('.main-post-author').text()
-        if author is None:
+        if author == '':
             return
         published_on = q('.date-tag').text()
-        if published_on is None:
+        if published_on == '':
             return
         body = q('.parallax-container p').text()
-        if body is None:
+        if body == '':
+            return
+        if author == '' and title == '' and body == '':
+            print('Empty item ......<passing>.....')
             return
         item = CitizenArticleItem()
+        item['url'] = response.url
         item['title'] = title
         item['author'] = author
         item['published_on'] = published_on

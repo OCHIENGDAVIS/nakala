@@ -112,6 +112,7 @@ GitHub.sublime-settings
 !.vscode/extensions.json 
 .history
 
-static/static-root/admin
-static/imgs/thumbs
+static/static-root/admin/
+static/imgs/thumbs/
+.scrapy/
 
