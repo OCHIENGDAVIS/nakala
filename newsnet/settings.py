@@ -55,7 +55,7 @@ ROOT_URLCONF = 'newsnet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [Path(BASE_DIR, 'templates'),],
+        'DIRS': [Path(BASE_DIR, 'templates'), ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,8 +76,12 @@ WSGI_APPLICATION = 'newsnet.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'nakaladb',
+        'USER': 'nakalaapp',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',
+        'PORT': 5432,
     }
 }
 
@@ -122,9 +126,9 @@ STATIC_URL = '/static/'
 
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = Path(BASE_DIR, 'static', 'static-root' )
+STATIC_ROOT = Path(BASE_DIR, 'static', 'static-root')
 
-MEDIA_ROOT = Path(BASE_DIR, 'static', 'media-root' )
+MEDIA_ROOT = Path(BASE_DIR, 'static', 'media-root')
 
 STATICFILES_DIRS = [
     Path(BASE_DIR, 'static').__str__()

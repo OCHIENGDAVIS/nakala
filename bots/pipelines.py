@@ -5,6 +5,7 @@
 
 
 # useful for handling different item types with a single interface
+from dateutil.parser import parse
 from citizen.models import CitizenModel
 
 class BotsPipeline:
@@ -40,6 +41,11 @@ class SaveCitizenCitizenPipeline(object):
         url_exists = CitizenModel.objects.filter(url__iexact=url)
         if url_exists.exists():
             print('Article already exists')
-            return 
+            return
+        date_raw = item['published_on']
+        date_temp = date_raw.replace('(', '')
+        date_clean = date_temp.replace(')', '')
+        published_date = parse(date_clean)
+        item['order_by'] = published_date
         item.save()
         return item

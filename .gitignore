@@ -114,5 +114,6 @@ GitHub.sublime-settings
 
 static/static-root/admin/
 static/imgs/thumbs/
+static/imgs/
 .scrapy/
 

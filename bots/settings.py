@@ -6,6 +6,7 @@
 #     https://docs.scrapy.org/en/latest/topics/settings.html
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
+import django
 import sys
 import os
 from pathlib import Path
@@ -14,7 +15,6 @@ DJANGO_BASE_DIR = Path(Path(__file__).resolve(strict=True)).parent.parent
 
 sys.path.append(DJANGO_BASE_DIR)
 os.environ['DJANGO_SETTINGS_MODULE'] = 'newsnet.settings'
-import django
 django.setup()
 
 
@@ -32,15 +32,15 @@ USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 16
+CONCURRENT_REQUESTS = 2
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 2
 # The download delay setting will honor only one of:
-# CONCURRENT_REQUESTS_PER_DOMAIN = 16
-# CONCURRENT_REQUESTS_PER_IP = 16
+CONCURRENT_REQUESTS_PER_DOMAIN = 2
+CONCURRENT_REQUESTS_PER_IP = 2
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
@@ -49,40 +49,40 @@ COOKIES_ENABLED = False
 TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
-#DEFAULT_REQUEST_HEADERS = {
+# DEFAULT_REQUEST_HEADERS = {
 #   'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
 #   'Accept-Language': 'en',
-#}
+# }
 
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
-# SPIDER_MIDDLEWARES = {
-#    'scrapy_deltafetch.DeltaFetch': 100,
-#
-# }
+SPIDER_MIDDLEWARES = {
+    'scrapy_deltafetch.DeltaFetch': 100,
 
-# DELTAFETCH_ENABLED = True
+}
+
+DELTAFETCH_ENABLED = True
 
 # DELTAFETCH_RESET = 1
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
+# DOWNLOADER_MIDDLEWARES = {
 #    'bots.middlewares.BotsDownloaderMiddleware': 543,
-#}
+# }
 
 # Enable or disable extensions
 # See https://docs.scrapy.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
+# }
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-   'scrapy.pipelines.images.ImagesPipeline': 1,
-   'bots.pipelines.CitizenPipeline': 100,
-   'bots.pipelines.SaveCitizenCitizenPipeline': 200,
+    'scrapy.pipelines.images.ImagesPipeline': 1,
+    'bots.pipelines.CitizenPipeline': 100,
+    'bots.pipelines.SaveCitizenCitizenPipeline': 200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -100,15 +100,15 @@ ITEM_PIPELINES = {
 
 # Enable and configure HTTP caching (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-HTTPCACHE_ENABLED = True
-HTTPCACHE_EXPIRATION_SECS = 0
-HTTPCACHE_DIR = 'httpcache'
-HTTPCACHE_IGNORE_HTTP_CODES = []
-HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+# HTTPCACHE_ENABLED = True
+# HTTPCACHE_EXPIRATION_SECS = 0
+# HTTPCACHE_DIR = 'httpcache'
+# HTTPCACHE_IGNORE_HTTP_CODES = []
+# HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 LOG_ENABLED = True
 
-# DEPTH_LIMIT = 2
+DEPTH_LIMIT = 2
 
 # IMAGES SETTINGS FOR SCRAPY
 
@@ -118,3 +118,20 @@ IMAGES_THUMBS = {
     'small': (50, 50),
     'big': (270, 270),
 }
+
+# THROTTTLING SETTINGS
+AUTOTHROTTLE_ENABLED = True
+
+# AUTOTHROTTLE_START_DELAY
+
+# AUTOTHROTTLE_MAX_DELAY
+
+# AUTOTHROTTLE_TARGET_CONCURRENCY
+
+AUTOTHROTTLE_DEBUG = True
+
+# CONCURRENT_REQUESTS_PER_DOMAIN
+
+# CONCURRENT_REQUESTS_PER_IP
+
+# DOWNLOAD_DELAY

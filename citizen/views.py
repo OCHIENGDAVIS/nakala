@@ -4,10 +4,9 @@ from django.shortcuts import get_object_or_404
 from .models import CitizenModel
 
 
-
 def index(request):
-    articles = CitizenModel.objects.all()[:30]
-    context= {
+    articles = CitizenModel.objects.all().order_by('-order_by')
+    context = {
         'articles': articles,
         'title': 'Citizen'
     }
@@ -22,4 +21,3 @@ def detail(request, id):
         'title': 'Citizen | Detail'
     }
     return render(request, 'citizen/detail.html', context)
-
