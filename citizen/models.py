@@ -15,7 +15,6 @@ class CitizenModel(models.Model):
     status = models.CharField(null=True, blank=True, max_length=300)
     url = models.CharField(max_length=300, null=True, blank=True)
 
-
     class Meta:
         verbose_name = 'Citizen Articles'
         verbose_name_plural = 'Citizen Articles'

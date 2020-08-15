@@ -4,8 +4,14 @@ from django.shortcuts import get_object_or_404
 from .models import CitizenModel
 
 
+def clean_duplicates():
+    for title in CitizenModel.objects.values_list('title', flat=True).distinct():
+        CitizenModel.objects.filter(pk__in=CitizenModel.objects.filter(title=title).values_list('id', flat=True)[1:]).delete()
+
+
 def index(request):
-    articles = CitizenModel.objects.all().order_by('-order_by')
+    clean_duplicates()
+    articles = CitizenModel.objects.all().distinct().order_by('-order_by')
     context = {
         'articles': articles,
         'title': 'Citizen'

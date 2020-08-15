@@ -32,15 +32,15 @@ USER_AGENT = 'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot
 ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
-CONCURRENT_REQUESTS = 2
+CONCURRENT_REQUESTS = 4
 
 # Configure a delay for requests for the same website (default: 0)
 # See https://docs.scrapy.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 2
+# DOWNLOAD_DELAY = 2
 # The download delay setting will honor only one of:
-CONCURRENT_REQUESTS_PER_DOMAIN = 2
-CONCURRENT_REQUESTS_PER_IP = 2
+# CONCURRENT_REQUESTS_PER_DOMAIN = 2
+# CONCURRENT_REQUESTS_PER_IP = 2
 
 # Disable cookies (enabled by default)
 COOKIES_ENABLED = False
@@ -83,6 +83,7 @@ ITEM_PIPELINES = {
     'scrapy.pipelines.images.ImagesPipeline': 1,
     'bots.pipelines.CitizenPipeline': 100,
     'bots.pipelines.SaveCitizenCitizenPipeline': 200,
+    'bots.pipelines.DublicateCitizenCitizenPipeline': 300
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -128,10 +129,16 @@ AUTOTHROTTLE_ENABLED = True
 
 # AUTOTHROTTLE_TARGET_CONCURRENCY
 
-AUTOTHROTTLE_DEBUG = True
+# AUTOTHROTTLE_DEBUG = True
 
 # CONCURRENT_REQUESTS_PER_DOMAIN
 
 # CONCURRENT_REQUESTS_PER_IP
 
 # DOWNLOAD_DELAY
+
+REACTOR_THREADPOOL_MAXSIZE = 100
+
+DEPTH_PRIORITY = 1
+SCHEDULER_DIST_QUEUE = 'scrapy.squeues.PickleFifoDiskQueue'
+SCHEDULER_MEMORY_QUEUE = 'scrapy.squeues.FifoMemoryQueue'
