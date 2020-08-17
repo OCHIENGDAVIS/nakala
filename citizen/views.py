@@ -1,8 +1,9 @@
 import json
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
-from .models import CitizenModel
 
+from .models import CitizenModel
+import runner
 
 def clean_duplicates():
     for title in CitizenModel.objects.values_list('title', flat=True).distinct():
@@ -27,3 +28,7 @@ def detail(request, id):
         'title': 'Citizen | Detail'
     }
     return render(request, 'citizen/detail.html', context)
+
+
+
+

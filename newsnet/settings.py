@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'djcelery',
+    # 'djkombu',
+    'django_celery_results',
+    # 'kombu.transport.django',
     'citizen.apps.CitizenConfig',
 ]
 
@@ -51,6 +55,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'newsnet.urls'
+import djcelery
+djcelery.setup_loader()
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
 
 TEMPLATES = [
     {
@@ -133,3 +141,6 @@ MEDIA_ROOT = Path(BASE_DIR, 'static', 'media-root')
 STATICFILES_DIRS = [
     Path(BASE_DIR, 'static').__str__()
 ]
+
+
+
